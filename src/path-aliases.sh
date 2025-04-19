@@ -27,3 +27,8 @@ function u2w () {
     local new_path=$(echo $1 | sed 's/^\/\([a-z]\)\//\U\1\:\\/')
     echo $new_path | sed 's/\//\\/g' 
 }
+
+# this one makes a dir and directly cd's into in
+function mkcd () { 
+    mkdir -p $1 && cd $1 
+}
