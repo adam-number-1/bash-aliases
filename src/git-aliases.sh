@@ -17,3 +17,16 @@ alias gitprune='DDEFBR=$(basename $(git symbolic-ref refs/remotes/origin/HEAD)) 
 
 # this one pushes current branch to origin
 alias gitpcb='git push origin $(git branch --show-current)'
+
+# this one deletes a local repository and clones it again with the lates
+# commit only. good for very busy forks that would take ages to sync
+function gitrmcl () {
+    BACK_DIR=$(pwd)
+    cd $1 \
+    && ORIGIN_URL=$(git remote get-url origin) \
+    && REPO_DIR=$(pwd) \
+    && cd .. \
+    && rm -rf $REPO_DIR \
+    && git clone --depth=1 $ORIGIN_URL
+    cd $BACK_DIR
+}
